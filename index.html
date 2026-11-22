@@ -1,4 +1,511 @@
 <!doctype html>
-<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>网站占位</title>
-<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#f2eee7;color:#342f2a;font:16px system-ui}main{width:min(88vw,640px);text-align:center}svg{display:block;width:100%;height:auto;border-radius:16px}h1{font-size:1.4rem}</style>
-<main><svg viewBox="0 0 640 320" role="img" aria-label="山景占位图"><rect width="640" height="320" fill="#e6c9b4"/><circle cx="460" cy="102" r="46" fill="#ffecd0"/><path d="M0 288l170-164 100 91 135-98 235 195v8H0z" fill="#9b7771"/><path d="M0 304l175-74 123 37 130-52 212 89v16H0z" fill="#514550"/></svg><h1>网站占位页</h1></main></html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f0e9dc">
+<meta name="description" content="给妈妈的一张生日唱片。">
+<title>给妈妈的生日唱片</title>
+<style>
+:root {
+  color-scheme:light; --paper:#f0e9dc; --ink:#302821; --muted:#67584b; --line:#bfa990;
+  --copper:#8e4c3e; --cream:#fff1d4; --ease:cubic-bezier(.24,.72,.27,1);
+  --serif:"Songti SC","Noto Serif CJK SC","STSong","SimSun",serif;
+}
+* { box-sizing:border-box; }
+[hidden] { display:none!important; }
+html { min-width:280px; }
+body {
+  margin:0; color:var(--ink); font-family:system-ui,"PingFang SC","Microsoft YaHei",sans-serif;
+  background:radial-gradient(ellipse at 32% 5%,#fff8ea,transparent 65%),var(--paper);
+}
+button,input { font:inherit; }
+button { cursor:pointer; -webkit-tap-highlight-color:transparent; touch-action:manipulation; }
+button:focus-visible,input:focus-visible { outline:2px solid #96663f; outline-offset:6px; }
+.definitions { position:absolute; width:0; height:0; overflow:hidden; pointer-events:none; }
+.layout {
+  width:min(100%,1270px); min-height:100vh; min-height:100svh; margin:auto;
+  padding:max(19px,env(safe-area-inset-top)) clamp(20px,4.7vw,66px)
+    max(22px,env(safe-area-inset-bottom));
+  display:flex; flex-direction:column;
+}
+.masthead {
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:0 0 14px; border-bottom:1px solid #bba48888;
+}
+.brand { display:flex; align-items:center; gap:9px; font:400 17px/1.2 var(--serif); letter-spacing:.15em; }
+.brand svg { width:22px; height:22px; color:#925f45; }
+.steps { display:flex; gap:6px; padding:0; margin:0; list-style:none; }
+.steps li {
+  width:13px; height:2px; border-radius:3px; background:#b5a18b;
+  transition:width .38s var(--ease),background .38s;
+}
+.steps li[aria-current="step"] { width:26px; background:#8e4c3e; }
+main { flex:1; display:grid; align-items:center; }
+.chapter { padding-top:clamp(16px,3vh,43px); }
+.chapter.entering { animation:page-in .61s var(--ease) both; }
+@keyframes page-in { from { opacity:0; transform:translateY(8px); } }
+.spread {
+  display:grid; grid-template-columns:minmax(240px,.82fr) minmax(0,1.18fr);
+  align-items:center; gap:clamp(24px,5.6vw,76px);
+}
+.copy { padding:12px 0; min-width:0; }
+.eyebrow {
+  display:flex; align-items:center; gap:12px; margin:0 0 18px; color:#824d3d;
+  font-size:.77rem; letter-spacing:.2em;
+}
+.eyebrow::before { content:""; width:26px; height:1px; background:#ab705b; }
+.copy h1,.copy h2 {
+  margin:0; font:400 clamp(39px,4.3vw,65px)/1.12 var(--serif);
+  letter-spacing:.027em; text-wrap:balance;
+}
+.copy h1:focus,.copy h2:focus { outline:none; }
+.description { margin:clamp(13px,2.7vh,30px) 0 0; max-width:25em; color:var(--muted); line-height:1.85; font-size:clamp(15px,1.35vw,18px); }
+
+.pane {
+  --light:#815044; --dark:#302024;
+  isolation:isolate; position:relative; width:100%; max-width:690px; justify-self:center;
+  border:1px solid #594138; border-radius:9px; overflow:hidden; aspect-ratio:640/500;
+  background:radial-gradient(ellipse at 48% 26%,var(--light) 4%,transparent 72%),var(--dark);
+  box-shadow:0 18px 38px #5e40352b,0 2px 5px #51382b38;
+}
+.pane::before {
+  content:""; position:absolute; inset:clamp(8px,1.55vw,15px); z-index:3;
+  border:1px solid #f8d8b13a; border-radius:5px; pointer-events:none;
+}
+.pane::after {
+  content:""; position:absolute; inset:0; z-index:-1; opacity:.28; pointer-events:none;
+  background:repeating-linear-gradient(130deg,transparent 0 3px,#fff1d409 3px 4px);
+  mask-image:radial-gradient(ellipse at 50% 48%,#000,transparent 82%);
+}
+
+.stage-record { --light:#5f624e; --dark:#282b27; }
+.stage-finale { --light:#8a504c; --dark:#42282b; }
+.art { position:absolute; inset:0; display:block; width:100%; height:100%; pointer-events:none; }
+.hit { position:absolute; border:0; background:none; color:var(--cream); padding:0; }
+.gift-hit { inset:29% 22% 14%; border-radius:9px; }
+.gift-hit .hit-mark {
+  position:absolute; left:50%; bottom:0; transform:translateX(-50%);
+  border:1px solid #f7d7a38c; color:#fff1d8; background:#422a2de0;
+  letter-spacing:.09em; border-radius:4px; padding:8px 13px; white-space:nowrap;
+}
+.record-hit {
+  width:clamp(45px,8.3%,55px); aspect-ratio:1; display:grid; place-items:center;
+  transform:translate(-50%,-50%); border-radius:50%;
+}
+
+
+.record-hit {
+  top:48.8%; left:43%; background:#793d35; border:1px solid #ffdcaa;
+  box-shadow:0 0 0 4px #e4a47941,0 5px 12px #21191366;
+}
+.record-hit svg { width:48%; height:48%; fill:#fff2da; }
+.hit:focus-visible { outline-color:#ffdfa5; outline-offset:5px; }
+.hit-mark,.record-hit { animation:cue 4s ease-in-out infinite; }
+.chapter.urgent .hit-mark,.chapter.urgent .record-hit { animation-duration:2.2s; }
+@keyframes cue {
+  0%,100% { box-shadow:0 0 0 1px #f4d1a64a,0 0 5px #efc1842b; }
+  45% { box-shadow:0 0 0 3px #ffe0ad5c,0 0 22px #ffc78e93; }
+}
+.hit:hover .hit-mark,.record-hit:hover { background-color:#9a5546cc; }
+
+.gift-lid {
+  transform-origin:326px 225px; transition:transform .85s var(--ease),opacity .65s var(--ease);
+}
+.gift-hidden-record { opacity:0; transform:translateY(30px) rotate(5deg); transform-origin:320px 280px; }
+.stage-gift.opened .gift-lid { transform:translate(-82px,-90px) rotate(-16deg); opacity:.92; }
+.stage-gift.opened .gift-hidden-record { animation:record-rise .88s var(--ease) .14s both; }
+@keyframes record-rise { to { opacity:1; transform:translate(21px,-54px) rotate(-13deg); } }
+.gift-sparks { opacity:0; transform-origin:335px 222px; }
+.stage-gift.opened .gift-sparks { animation:gift-sparks 1.06s var(--ease) both; }
+@keyframes gift-sparks { 0% { opacity:0; transform:scale(.57); } 40% { opacity:1; } 100% { opacity:.48; transform:scale(1.12); } }
+
+
+
+
+.platter { transform-origin:275px 244px; animation:spin 8.5s linear infinite paused; }
+.stage-record.playing .platter { animation-play-state:running; }
+@keyframes spin { to { transform:rotate(360deg); } }
+.tonearm { transform-origin:493px 148px; transition:transform .61s var(--ease); }
+.stage-record.playing .tonearm { transform:rotate(27deg); }
+.media .pane { margin-inline:auto; }
+.player {
+  display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; gap:12px;
+  margin:10px auto 0; padding:9px 13px; max-width:690px; min-height:45px;
+  border:1px solid #bea489; border-radius:5px; background:#faf0de; color:#6d5141;
+  font-size:.78rem; font-variant-numeric:tabular-nums;
+}
+.player input {
+  width:100%; height:26px; margin:0; accent-color:#8e4c3e; cursor:pointer; min-width:0;
+}
+.audio-note { margin:7px 0 0; font-size:.79rem; line-height:1.45; color:#794638; }
+.actions { min-height:53px; display:flex; justify-content:flex-end; align-items:end; margin:clamp(10px,2.1vh,20px) 0 0; }
+.next {
+  display:inline-flex; align-items:center; justify-content:center; gap:15px; min-height:46px;
+  padding:9px 18px; border:1px solid #6b3b31; border-radius:4px; color:#fff6e4;
+  background:#783f35; letter-spacing:.07em; animation:page-in .44s var(--ease) both;
+  transition:background .25s;
+}
+.next:hover { background:#8f4c40; }
+.next svg { width:17px; height:17px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.finish-rays { transform-origin:325px 238px; animation:gift-sparks 1.23s var(--ease) both; }
+@media (max-width:735px) {
+  .layout { padding-inline:clamp(16px,5.3vw,40px); }
+  .spread { grid-template-columns:minmax(0,1fr); gap:16px; }
+  .copy { padding:3px 0 0; }
+  .eyebrow { margin-bottom:9px; }
+  .copy h1,.copy h2 { font-size:clamp(32px,8.4vw,54px); line-height:1.12; }
+  .description { margin-top:10px; }
+
+  .actions { justify-content:stretch; }
+  .next { width:100%; min-height:48px; }
+  .gift-hit .hit-mark { padding:6px 10px; font-size:.75rem; }
+}
+@media (orientation:landscape) and (max-height:520px) and (min-width:540px) {
+  .layout { padding:12px clamp(20px,5vw,50px) 14px; }
+  .masthead { padding-bottom:9px; }
+  .chapter { padding-top:12px; }
+  .spread { grid-template-columns:minmax(140px,.83fr) minmax(0,1.17fr); gap:clamp(14px,5vw,42px); }
+  .pane { width:min(100%,calc(100svh * .68)); }
+  .copy h1,.copy h2 { font-size:clamp(29px,8vh,51px); }
+  .eyebrow { margin-bottom:8px; }
+  .description { margin-top:7px; }
+  .player { width:min(100%,calc(100svh * .68)); min-height:39px; padding-block:4px; }
+  .actions { min-height:42px; margin-top:8px; }
+  .next { min-height:40px; width:auto; min-width:120px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  *,*::before,*::after { animation:none!important; transition:none!important; }
+  .stage-gift.opened .gift-hidden-record { opacity:1; transform:translate(21px,-54px) rotate(-13deg); }
+  .stage-gift.opened .gift-sparks { opacity:.48; }
+
+}
+</style>
+</head>
+<body>
+<svg class="definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <linearGradient id="foil" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#fff0bc"/><stop offset=".45" stop-color="#c5955c"/><stop offset=".72" stop-color="#a6774f"/><stop offset="1" stop-color="#f7d6a0"/>
+    </linearGradient>
+    <linearGradient id="rose-paper" x1="0" y1="0" x2=".85" y2="1">
+      <stop stop-color="#f1bfaa"/><stop offset=".55" stop-color="#c98575"/><stop offset="1" stop-color="#925457"/>
+    </linearGradient>
+    <linearGradient id="rose-shadow" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#bc796c"/><stop offset="1" stop-color="#703f46"/>
+    </linearGradient>
+    <linearGradient id="case" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#a77455"/><stop offset=".32" stop-color="#704c3b"/><stop offset="1" stop-color="#3f3030"/>
+    </linearGradient>
+    <radialGradient id="vinyl" cx=".35" cy=".27" r=".75">
+      <stop stop-color="#64615e"/><stop offset=".42" stop-color="#383337"/><stop offset="1" stop-color="#181618"/>
+    </radialGradient>
+    <linearGradient id="card-stock" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#fff2d9"/><stop offset=".55" stop-color="#f4dbbe"/><stop offset="1" stop-color="#d9aa88"/>
+    </linearGradient>
+    <path id="star" d="M0-12Q1-1 12 0 1 1 0 12-1 1-12 0-1-1 0-12Z"/>
+    <path id="heart-seal" d="M0 7c-3-3-13-9-13-16 0-9 10-10 13-3 4-7 13-6 13 3 0 7-10 13-13 16Z"/>
+    <g id="leaf-sprig" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round">
+      <path d="M3 87C17 61 39 37 80 15M18 64C11 48 16 31 19 25c10 16 9 27-1 39Zm11-15c7-15 24-23 41-19C57 40 43 46 29 49Zm9-9c-2-14 3-25 13-36 4 14 0 26-13 36Zm19-15c12-12 28-15 43-10-14 9-26 13-43 10ZM8 78c14-15 24-17 38-16-11 9-25 15-38 16Z"/>
+    </g>
+    <g id="vinyl-record">
+      <circle r="143" fill="url(#vinyl)" stroke="#bd9a79" stroke-width="1.6"/>
+      <g fill="none" stroke="#ebd9c1" stroke-opacity=".23">
+        <circle r="134"/><circle r="130"/><circle r="124"/><circle r="112"/>
+        <circle r="104"/><circle r="98"/><circle r="86"/><circle r="74"/>
+        <circle r="66"/><circle r="53"/>
+      </g>
+      <path d="M-123 5a123 123 0 0 1 168-120m-74 56a66 66 0 0 1 77 20M94 36a95 95 0 0 1-137 52" fill="none" stroke="#fff0da" stroke-opacity=".35" stroke-width="2.5" stroke-linecap="round"/>
+      <circle r="46" fill="#b97461" stroke="#f7daa4"/>
+      <circle r="36" fill="none" stroke="#f7d2a6" stroke-opacity=".65"/>
+      <use href="#star" transform="translate(0 -28) scale(.47)" fill="#ffe6b8"/>
+      <use href="#star" transform="translate(0 28) scale(.36)" fill="#ffe6b8"/>
+    </g>
+  </defs>
+</svg>
+
+<div class="layout">
+  <header class="masthead">
+    <div class="brand">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.15">
+        <circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M6 12a6 6 0 0 1 6-6m6 6a6 6 0 0 1-6 6"/>
+      </svg>
+      <span>生日唱片</span>
+    </div>
+    <ol class="steps" aria-label="贺卡进度">
+      <li aria-label="拆礼盒" aria-current="step"></li>
+      <li aria-label="听唱片"></li>
+      <li aria-label="生日祝福"></li>
+    </ol>
+  </header>
+
+  <main aria-label="给妈妈的生日贺卡">
+    <section class="chapter" aria-labelledby="gift-title">
+      <div class="spread">
+        <div class="copy">
+          <p class="eyebrow">给妈妈</p>
+          <h1 id="gift-title" tabindex="-1">有一份礼物，<br>想亲手给你。</h1>
+          <p class="description">有一段话，想留在今天送给你。</p>
+        </div>
+        <div class="pane stage-gift">
+          <svg class="art" viewBox="0 0 640 500" aria-hidden="true">
+            <ellipse cx="327" cy="390" rx="215" ry="73" fill="#26191e" opacity=".41"/>
+            <path d="M121 389c22-49 107-90 205-91 97-2 177 31 196 77" fill="none" stroke="#e0b485" stroke-opacity=".33" stroke-width="1.25"/>
+            <path d="M157 148C205 98 364 62 475 120" fill="none" stroke="#edc299" stroke-opacity=".3" stroke-width="1.2"/>
+            <ellipse cx="328" cy="388" rx="191" ry="52" fill="#4e3430" stroke="#b18262" stroke-width="1"/>
+            <ellipse cx="328" cy="384" rx="178" ry="41" fill="none" stroke="#deb084" stroke-opacity=".45"/>
+            <g class="gift-sparks" fill="#ffe0a5">
+              <use href="#star" transform="translate(157 137) scale(.83)"/><use href="#star" transform="translate(494 152) scale(.88)"/>
+              <use href="#star" transform="translate(419 88) scale(.47)"/><circle cx="211" cy="113" r="2.8"/><circle cx="477" cy="254" r="2.7"/>
+            </g>
+            <path d="m178 235 145-55 150 48-141 59Z" fill="#6f4542" stroke="#e2ab88" stroke-width="1.3"/>
+            <g class="gift-hidden-record">
+              <use href="#vinyl-record" transform="translate(322 243) scale(.61)"/>
+              <circle cx="322" cy="243" r="4" fill="#3b2429"/>
+            </g>
+            <path d="m184 240 148 56v119l-148-57Z" fill="url(#rose-paper)" stroke="#f3c39f" stroke-width="1.2"/>
+            <path d="m332 296 138-58v119l-138 58Z" fill="url(#rose-shadow)" stroke="#e7ad8b" stroke-width="1.2"/>
+            <path d="m246 264 34 13v118l-34-13Zm137 10 30-13v119l-30 13Z" fill="url(#foil)"/>
+            <path d="m190 353 135 52m13 0 127-53" fill="none" stroke="#ffe0b6" stroke-opacity=".4"/>
+            <g class="gift-lid">
+              <path d="m170 214 147-56 165 49-151 59Z" fill="url(#rose-paper)" stroke="#f5cfab" stroke-width="1.25"/>
+              <path d="m170 214 161 52v37l-161-56Z" fill="#d38e7b" stroke="#efb997" stroke-width="1.25"/>
+              <path d="m331 266 151-59v35l-151 61Z" fill="#a46a61" stroke="#ebb892" stroke-width="1.25"/>
+              <path d="m225 229 35 12 144-56-35-11Zm53-56-35 13 150 55 37-14Z" fill="url(#foil)" opacity=".94"/>
+              <path d="m245 238 33 11v36l-33-12Zm140 7 35-13v35l-35 14Z" fill="url(#foil)"/>
+              <path d="M320 217c-24-8-67-22-69-42-1-15 19-22 37-13 17 8 25 27 32 55Zm2-1c19-44 47-67 73-60 20 6 13 24-5 37-16 12-38 17-68 23Z" fill="url(#foil)" stroke="#fff0bd" stroke-width="1.6"/>
+              <path d="M253 173c10-9 37 8 67 44-34-12-58-21-67-44Zm71 42c25-26 51-51 71-48-9 25-42 37-71 48Z" fill="#8a564c" opacity=".63"/>
+              <path d="M321 215c-30 20-52 29-77 35l13 7-2 12c31-11 53-29 69-48 18 8 36 25 46 42l8-9 11-2c-18-19-40-33-63-36Z" fill="#e8b774" stroke="#ffe4a8" stroke-width="1"/>
+              <ellipse cx="322" cy="214" rx="12" ry="8" transform="rotate(-12 322 214)" fill="url(#foil)" stroke="#ffecb4"/>
+            </g>
+            <g fill="#f1c48c" opacity=".66"><use href="#star" transform="translate(149 258) scale(.46)"/><use href="#star" transform="translate(499 249) scale(.52)"/></g>
+          </svg>
+          <button class="hit gift-hit" type="button" aria-label="拆开礼盒"><span class="hit-mark" aria-hidden="true">拆开礼盒</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter" aria-labelledby="record-title" hidden>
+      <div class="spread">
+        <div class="copy">
+          <p class="eyebrow">听一段录音</p>
+          <h2 id="record-title" tabindex="-1">有些话，<br>想说给你听。</h2>
+          <p class="description">按下唱片中央的播放键，听听今天的礼物。</p>
+        </div>
+        <div class="media">
+          <div class="pane stage-record">
+            <svg class="art" viewBox="0 0 640 500" aria-hidden="true">
+              <ellipse cx="326" cy="430" rx="264" ry="49" fill="#161917" opacity=".55"/>
+              <rect x="61" y="87" width="518" height="342" rx="26" fill="#392c28" stroke="#b48968"/>
+              <rect x="61" y="71" width="518" height="340" rx="26" fill="url(#case)" stroke="#f0c192" stroke-width="1.35"/>
+              <rect x="77" y="87" width="486" height="307" rx="18" fill="#312d28" stroke="#8b6d55" stroke-width="1.35"/>
+              <rect x="85" y="95" width="470" height="292" rx="14" fill="#464036" stroke="#cda783" stroke-opacity=".5"/>
+              <path d="M115 112h328m-328 259h315" stroke="#ecb98a" stroke-opacity=".25"/>
+              <circle cx="275" cy="244" r="147" fill="#241f21" stroke="#a8876d"/>
+              <g class="platter"><use href="#vinyl-record" x="275" y="244"/></g>
+              <rect x="458" y="120" width="75" height="225" rx="12" fill="#342b2d" stroke="#a4856d"/>
+              <circle cx="493" cy="148" r="26" fill="#3b3130" stroke="#efc69c" stroke-width="1.45"/>
+              <g class="tonearm">
+                <path d="M493 148c14 30 16 60 11 97l-21 64" fill="none" stroke="#242122" stroke-width="12" stroke-linecap="round"/>
+                <path d="M493 148c14 30 16 60 11 97l-21 64" fill="none" stroke="url(#foil)" stroke-width="6.5" stroke-linecap="round"/>
+                <path d="m475 304 13 4-5 23-15-4Z" fill="#af7b64" stroke="#ffe1aa" stroke-width="1.25"/>
+              </g>
+              <circle cx="493" cy="148" r="12" fill="url(#foil)" stroke="#d7ac80"/>
+              <circle cx="493" cy="148" r="5" fill="#714b40"/>
+              <rect x="468" y="358" width="55" height="13" rx="3" fill="#292525" stroke="#ab896c"/>
+              <path d="M477 362h36m-36 4h36" stroke="#d6ac85" stroke-width="1" stroke-dasharray="2 3"/>
+              <circle cx="107" cy="366" r="4" fill="#e5bc88"/><circle cx="539" cy="101" r="3" fill="#ddb182"/>
+            </svg>
+            <button type="button" class="hit record-hit" aria-label="播放录音">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path class="play-icon" d="M8 5q-1-.5-1 .8v12.4q0 1.3 1 .8l11-6.3a.8.8 0 0 0 0-1.4Z"/>
+                <path class="pause-icon" d="M7 5h3.6v14H7zm6.4 0H17v14h-3.6z" hidden/>
+              </svg>
+            </button>
+          </div>
+          <div class="player">
+            <span class="elapsed" aria-hidden="true">0:00</span>
+            <input class="seek" type="range" min="0" max="1" value="0" step=".05" aria-label="录音播放进度" disabled>
+            <span class="duration" aria-hidden="true">0:00</span>
+          </div>
+          <p class="audio-note" role="status" hidden></p>
+          <audio id="birthday-audio" src="./生日音频2.0.mp3" preload="metadata"></audio>
+        </div>
+      </div>
+      <div class="actions"><button class="next" type="button" hidden>继续 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></button></div>
+    </section>
+
+    <section class="chapter" aria-labelledby="final-title" hidden>
+      <div class="spread">
+        <div class="copy">
+          <p class="eyebrow">最后一句</p>
+          <h2 id="final-title" tabindex="-1">妈妈，<br>生日快乐。</h2>
+          <p class="description">愿往后的每一年，都有新的开心值得记下来。</p>
+        </div>
+        <div class="pane stage-finale">
+          <svg class="art" viewBox="0 0 640 500" aria-hidden="true">
+            <ellipse cx="323" cy="387" rx="230" ry="48" fill="#2d1d23" opacity=".52"/>
+            <g class="finish-rays" fill="none" stroke="url(#foil)" stroke-width="1.15">
+              <ellipse cx="324" cy="251" rx="244" ry="141" transform="rotate(-17 324 251)" opacity=".47"/>
+              <path d="M134 135q186-116 371 3M109 345q172 129 390 14" opacity=".69"/>
+              <use href="#star" transform="translate(117 183) scale(.88)" fill="#ffe8b3"/>
+              <use href="#star" transform="translate(514 147) scale(.8)" fill="#ffe8b3"/>
+              <use href="#star" transform="translate(528 328) scale(.62)" fill="#ffe8b3"/>
+            </g>
+            <rect x="166" y="108" width="326" height="270" rx="5" transform="rotate(8 329 243)" fill="#a06a61" stroke="#e6b891"/>
+            <g transform="rotate(-8 324 250)">
+              <rect x="150" y="117" width="349" height="264" rx="5" fill="url(#card-stock)" stroke="#fce1b7" stroke-width="1.45"/>
+              <rect x="163" y="130" width="323" height="238" rx="2" fill="none" stroke="#b88864" stroke-opacity=".77"/>
+              <g color="#a37650"><use href="#leaf-sprig" transform="translate(172 141) scale(.89)"/><use href="#leaf-sprig" transform="translate(478 355) rotate(180) scale(.89)"/></g>
+              <circle cx="324" cy="251" r="69" fill="none" stroke="#bd9165" stroke-width="1.2" stroke-dasharray="1 5"/>
+              <circle cx="324" cy="251" r="56" fill="#e8c3a0" stroke="#b58366" stroke-width="1.3"/>
+              <circle cx="324" cy="251" r="48" fill="#bf7e70" stroke="#fae1b5" stroke-width="1.1"/>
+              <use href="#heart-seal" transform="translate(324 261) scale(2.15)" fill="url(#foil)" stroke="#ffe5af" stroke-width=".7"/>
+              <use href="#star" transform="translate(324 176) scale(.44)" fill="#b88b5d"/>
+              <use href="#star" transform="translate(324 326) scale(.44)" fill="#b88b5d"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div class="actions"><button class="next" type="button">从头再看 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9a7 7 0 1 1 0 7M6 4v5h5"/></svg></button></div>
+    </section>
+  </main>
+</div>
+
+<script>
+(() => {
+  const one = (selector, root = document) => root.querySelector(selector);
+  const chapters = Array.from(document.querySelectorAll('.chapter'));
+  const ticks = Array.from(document.querySelectorAll('.steps li'));
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const gift = one('.stage-gift');
+  const giftHit = one('.gift-hit');
+  const record = one('.stage-record');
+  const recordHit = one('.record-hit');
+  const playIcon = one('.play-icon', recordHit);
+  const pauseIcon = one('.pause-icon', recordHit);
+  const audio = one('#birthday-audio');
+  const seek = one('.seek');
+  const elapsed = one('.elapsed');
+  const duration = one('.duration');
+  const audioNote = one('.audio-note');
+  let current = 0;
+  let hintTimer = 0;
+  let scrubbing = false;
+
+  function invite() {
+    clearTimeout(hintTimer);
+    const chapter = chapters[current];
+    if (current < 2) hintTimer = setTimeout(() => {
+      if (chapter === chapters[current] && (current === 0 || one('.next', chapter).hidden)) chapter.classList.add('urgent');
+    }, 3800);
+  }
+
+  function complete(chapter) {
+    chapter.classList.remove('urgent');
+    clearTimeout(hintTimer);
+    one('.next', chapter).hidden = false;
+  }
+
+  function show(index) {
+    current = index;
+    chapters.forEach((chapter, i) => {
+      chapter.hidden = i !== index;
+      chapter.classList.toggle('entering', i === index);
+      chapter.classList.remove('urgent');
+      if (i === index) ticks[i].setAttribute('aria-current', 'step');
+      else ticks[i].removeAttribute('aria-current');
+    });
+    window.scrollTo(0, 0);
+    one('h1,h2', chapters[index]).focus({ preventScroll:true });
+    invite();
+  }
+
+  function reset() {
+    audio.pause();
+    if (audio.readyState) audio.currentTime = 0;
+    gift.classList.remove('opened');
+    giftHit.hidden = false;
+    audioNote.hidden = true;
+    one('.next', chapters[1]).hidden = true;
+  }
+
+  chapters.forEach((chapter, index) => {
+    const next = one('.next', chapter);
+    if (!next) return;
+    next.addEventListener('click', () => {
+      if (index !== current || next.hidden) return;
+      if (index === 1) audio.pause();
+      if (index === 2) {
+        reset();
+        show(0);
+      } else show(index + 1);
+    });
+  });
+
+  giftHit.addEventListener('click', () => {
+    giftHit.hidden = true;
+    gift.classList.add('opened');
+    window.setTimeout(() => show(1), reducedMotion.matches ? 0 : 1060);
+  });
+
+  function clock(seconds) {
+    const time = Number.isFinite(seconds) ? Math.max(0, Math.floor(seconds)) : 0;
+    return Math.floor(time / 60) + ':' + String(time % 60).padStart(2, '0');
+  }
+
+  function updateTimeline() {
+    const ready = Number.isFinite(audio.duration) && audio.duration > 0;
+    seek.disabled = !ready;
+    seek.max = ready ? audio.duration : 1;
+    if (!scrubbing) seek.value = audio.currentTime;
+    elapsed.textContent = clock(audio.currentTime);
+    duration.textContent = clock(audio.duration);
+    seek.setAttribute('aria-valuetext', elapsed.textContent + ' / ' + duration.textContent);
+  }
+
+  function updatePlayback() {
+    const playing = !audio.paused && !audio.ended;
+    record.classList.toggle('playing', playing);
+    playIcon.toggleAttribute('hidden',playing);
+    pauseIcon.toggleAttribute('hidden',!playing);
+    recordHit.setAttribute('aria-label', playing ? '暂停录音' : '播放录音');
+  }
+
+  function showAudioNote(message) {
+    if (current !== 1) return;
+    audioNote.textContent = message;
+    audioNote.hidden = false;
+  }
+
+  recordHit.addEventListener('click', () => {
+    complete(chapters[1]);
+    if (!audio.paused && !audio.ended) {
+      audio.pause();
+      updatePlayback();
+      return;
+    }
+    audioNote.hidden = true;
+    if (audio.ended) audio.currentTime = 0;
+    audio.play().catch(error => {
+      if (error.name === 'AbortError') return;
+      if (audio.error) showAudioNote('录音暂时无法播放。请确认音频和网页在同一个目录。');
+      else showAudioNote('请再点一次唱片播放录音。');
+    });
+  });
+
+  seek.addEventListener('pointerdown', () => { scrubbing = true; });
+  window.addEventListener('pointerup', () => { scrubbing = false; });
+  window.addEventListener('pointercancel', () => { scrubbing = false; });
+  seek.addEventListener('blur', () => { scrubbing = false; });
+  seek.addEventListener('input', () => {
+    audio.currentTime = Number(seek.value);
+    updateTimeline();
+  });
+  ['loadedmetadata','durationchange','timeupdate','seeked'].forEach(event => audio.addEventListener(event, updateTimeline));
+  ['play','pause','ended','emptied','error'].forEach(event => audio.addEventListener(event, updatePlayback));
+  invite();
+})();
+</script>
+</body>
+</html>
